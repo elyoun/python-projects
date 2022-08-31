@@ -10,11 +10,32 @@ file = open(r'C:\Users\joaofesoares\Desktop\fizzbuzz\words.txt')
 def clear_console():
     os.system('cls')
 
+word_list = file.read().splitlines()
+
 class hang_word:
-    def __init__(self):
-        word_list = file.read().splitlines()
-        random_num = random.randint(0, len(word_list)-1)
-        self.word = str(word_list[random_num])
+    def __init__(self, letters):
+        
+
+        word_list2 = sort_dict(word_list)
+
+        if (letters == 4):
+            key = random.randint(1, 4)
+        
+        elif (letters == 7):
+            key = random.randint(5,7)
+        
+        elif (letters == 10):
+            key = random.randint(8,10)
+        
+        else:
+            key = random.randint(9,14)
+
+        random_num = random.randint(0, len(word_list2[key])-1)
+
+
+        word_list2 = word_list2[key]
+
+        self.word = str(word_list2[random_num])
         self.meaning = dictionary.meaning(self.word)
         
     def getWord(self):
@@ -30,26 +51,30 @@ class hang_word:
 
 def game():
     #Choose difficulty
-    print("1- 8 lives")
-    print("2- 5 lives")
-    print("3 - 3 lives")
-    print("4 - 1 life\n")
+    print("1- 8 lives | up to 4 letters")
+    print("2- 5 lives | up to 7 letters")
+    print("3 - 3 lives | up to 10 letters")
+    print("4 - 2 lives | up to 14 letters\n")
     
     difficulty = int(input("Select your difficulty: "))
 
     if (difficulty == 1):
         lives = 8
+        letters = 4
     elif (difficulty == 2):
         lives = 5
+        letters = 7
     elif (difficulty == 3):
         lives = 3
+        letters = 10
     else:
-        lives = 1
+        lives = 2
+        letters = 14
 
 
     #Initialize variables    
     wrongs = []
-    word1 = hang_word()
+    word1 = hang_word(letters)
     word_guess = word1.mkDash()
     print(word_guess)
     print(word1.getWord())
@@ -73,9 +98,9 @@ def game():
             finished = True
             break
             
-        print("wrong guesses: " + str(wrongs) + "\n")
+        print("Wrong guesses: " + str(wrongs) + "\n")
         print("Type 'hint' if you want a hint\n")
-        guess = input("Enter your guess(or hint): ")
+        guess = input("Enter your guess(or hint): ").lower()
         print("\n")
 
         if (list(guess) == word):
@@ -92,7 +117,7 @@ def game():
         else:
             wrongs.append(guess)
             lives = lives - 1
-            print("wrong guess\n")
+            print("Wrong guess\n")
 
 
         print("Word: " + str(word_guess) + "\n")
@@ -103,12 +128,12 @@ def game():
 
 
 #Program Structure
-option = input("Do you want to play? (y/n): ")
+option = input("Do you want to play? (y/n): ").lower()
 print("\n")
 while(option == 'y'):
     clear_console()
     game()
-    option = input("Do you want to play again? (y/n): ")
+    option = input("Do you want to play again? (y/n): ").lower()
 
 print("Thanks for playing!")
 
