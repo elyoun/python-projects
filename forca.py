@@ -2,7 +2,7 @@ import random
 import os
 from PyDictionary import PyDictionary
 from sort_list import sort_dict
-
+from timeit import default_timer
 
 dictionary=PyDictionary()
 file = open(r'C:\Users\joaofesoares\Desktop\fizzbuzz\words.txt')
@@ -76,8 +76,8 @@ def game():
     wrongs = []
     word1 = hang_word(letters)
     word_guess = word1.mkDash()
-    print(word_guess)
-    print(word1.getWord())
+    #print(word_guess)
+    #print(word1.getWord())
 
     word_guess = list(word_guess)
     word = list(word1.getWord())
@@ -90,7 +90,6 @@ def game():
     #Main structure of game
     while((word != word_guess) & (finished == False)):
         
-
         print("You have " + str(lives) + " lives")
 
         if(lives == 0):
@@ -123,7 +122,7 @@ def game():
         print("Word: " + str(word_guess) + "\n")
 
     if(lives > 0):
-        print("Congrats! You won! The word was in fact: " + word1.getWord())
+        print("Congrats! You won! The word was in fact: " + word1.getWord() + ". You took " + str(default_timer()-start) + " seconds to guess it.")
 
 
 
@@ -131,6 +130,7 @@ def game():
 option = input("Do you want to play? (y/n): ").lower()
 print("\n")
 while(option == 'y'):
+    start = default_timer()
     clear_console()
     game()
     option = input("Do you want to play again? (y/n): ").lower()

@@ -1,6 +1,7 @@
-from unittest import result
+import time
 
 def sort_dict(word_list):
+    start = time.time()
     #file = open(r'C:\Users\joaofesoares\Desktop\fizzbuzz\words.txt')
     #word_list = file.read().splitlines()
     #print(type(word_list))
@@ -20,6 +21,8 @@ def sort_dict(word_list):
     #print(c[1])
     for i in range (len(word_list)):
         key = len(word_list[i])
-        c[key].append(word_list[i]) 
+        c[key].append(word_list[i])
+    end = time.time()
+    print ("Sort completed in "+ str(end - start) + "seconds") 
     return c
     #print(len(c[2]))
