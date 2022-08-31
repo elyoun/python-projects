@@ -1,6 +1,9 @@
 import random
 import os
 from PyDictionary import PyDictionary
+from sort_list import sort_dict
+
+
 dictionary=PyDictionary()
 file = open(r'C:\Users\joaofesoares\Desktop\fizzbuzz\words.txt')
 
@@ -85,7 +88,6 @@ def game():
         elif (guess in word):
             for i in range(len(word)):
                 if (guess == word[i]):
-                    index = i
                     word_guess[i] = guess
         else:
             wrongs.append(guess)
